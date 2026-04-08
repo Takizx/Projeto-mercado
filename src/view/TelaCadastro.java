@@ -1,65 +1,39 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import controller.UsuarioController;
 
 public class TelaCadastro extends JFrame {
 
     public TelaCadastro(){
 
-        setTitle("Cadastro de Usuário");
-        setSize(400,250);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Cadastro");
+        setSize(300,200);
+        setLayout(null);
 
-        JPanel painel = new JPanel();
-        painel.setLayout(new GridLayout(4,2,10,10));
+        JTextField nome = new JTextField();
+        nome.setBounds(50,30,200,25);
 
-        JTextField campoNome = new JTextField();
-        JTextField campoCpf = new JTextField();
+        JTextField cpf = new JTextField();
+        cpf.setBounds(50,60,200,25);
 
-        JCheckBox administrador = new JCheckBox("Administrador");
+        JCheckBox admin = new JCheckBox("Admin");
+        admin.setBounds(50,90,100,25);
 
-        JButton botaoCadastrar = new JButton("Cadastrar");
-        JButton botaoVoltar = new JButton("Voltar");
+        JButton salvar = new JButton("Salvar");
+        salvar.setBounds(50,120,100,25);
 
-        painel.add(new JLabel("Nome:"));
-        painel.add(campoNome);
+        add(nome); add(cpf); add(admin); add(salvar);
 
-        painel.add(new JLabel("CPF:"));
-        painel.add(campoCpf);
+        UsuarioController controller = new UsuarioController();
 
-        painel.add(new JLabel(""));
-        painel.add(administrador);
-
-        painel.add(botaoCadastrar);
-        painel.add(botaoVoltar);
-
-        add(painel);
-
-        botaoVoltar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                new TelaLogin();
-                dispose();
-
-            }
-        });
-
-        botaoCadastrar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                JOptionPane.showMessageDialog(null,"Usuário cadastrado com sucesso!");
-
-                new TelaLogin();
-                dispose();
-
-            }
+        salvar.addActionListener(e -> {
+            controller.cadastrar(nome.getText(), cpf.getText(), admin.isSelected());
+            JOptionPane.showMessageDialog(null,"Cadastrado!");
+            new TelaLogin();
+            dispose();
         });
 
         setVisible(true);
     }
-
 }

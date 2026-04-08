@@ -1,56 +1,52 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import controller.LoginController;
+import model.Usuario;
 
 public class TelaLogin extends JFrame {
 
-    private JTextField campoNome;
-    private JTextField campoCpf;
-
     public TelaLogin(){
 
-        setTitle("Sistema de Supermercado - Login");
-        setSize(400,250);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setTitle("Login");
+        setSize(300,200);
+        setLayout(null);
 
-        JPanel painel = new JPanel();
-        painel.setLayout(new GridLayout(5,1,10,10));
+        JTextField nome = new JTextField();
+        nome.setBounds(50,30,200,25);
 
-        JLabel titulo = new JLabel("SUPERMERCADO", SwingConstants.CENTER);
+        JTextField cpf = new JTextField();
+        cpf.setBounds(50,60,200,25);
 
-        campoNome = new JTextField();
-        campoCpf = new JTextField();
+        JButton login = new JButton("Login");
+        login.setBounds(50,100,90,25);
 
-        JButton botaoLogin = new JButton("Login");
-        JButton botaoCadastrar = new JButton("Cadastrar Usuário");
+        JButton cadastro = new JButton("Cadastrar");
+        cadastro.setBounds(150,100,100,25);
 
-        painel.add(titulo);
-        painel.add(new JLabel("Nome:"));
-        painel.add(campoNome);
-        painel.add(new JLabel("CPF:"));
-        painel.add(campoCpf);
+        add(nome); add(cpf); add(login); add(cadastro);
 
-        JPanel painelBotoes = new JPanel();
-        painelBotoes.add(botaoLogin);
-        painelBotoes.add(botaoCadastrar);
+        LoginController controller = new LoginController();
 
-        add(painel, BorderLayout.CENTER);
-        add(painelBotoes, BorderLayout.SOUTH);
+        login.addActionListener(e -> {
+            Usuario u = controller.login(nome.getText(), cpf.getText());
 
-        botaoCadastrar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                new TelaCadastro();
+            if(u == null){
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
+            } else if(u.isAdmin()){
+                new TelaProdutos();
                 dispose();
-
+            } else {
+                new TelaCompra();
+                dispose();
             }
+        });
+
+        cadastro.addActionListener(e -> {
+            new TelaCadastroUsuario();
+            dispose();
         });
 
         setVisible(true);
     }
-
 }
