@@ -7,8 +7,8 @@ public class CarrinhoController {
 
     private Carrinho carrinho = new Carrinho();
 
-    public void adicionar(Produto p){
-        carrinho.adicionar(p);
+    public void adicionar(Produto p, int quantidade){
+        carrinho.adicionar(p, quantidade);
     }
 
     public double total(){

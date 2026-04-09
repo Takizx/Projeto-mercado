@@ -9,22 +9,28 @@ public class TelaLogin extends JFrame {
     public TelaLogin(){
 
         setTitle("Login");
-        setSize(300,200);
+        setSize(300, 200);
         setLayout(null);
 
+        JLabel labelNome = new JLabel("Nome:");
+        labelNome.setBounds(20, 30, 40, 25);
         JTextField nome = new JTextField();
-        nome.setBounds(50,30,200,25);
+        nome.setBounds(60, 30, 190, 25);
 
+        JLabel labelCpf = new JLabel("CPF:");
+        labelCpf.setBounds(20, 60, 40, 25);
         JTextField cpf = new JTextField();
-        cpf.setBounds(50,60,200,25);
+        cpf.setBounds(60, 60, 190, 25);
 
         JButton login = new JButton("Login");
-        login.setBounds(50,100,90,25);
+        login.setBounds(45, 100, 90, 25);
 
         JButton cadastro = new JButton("Cadastrar");
-        cadastro.setBounds(150,100,100,25);
+        cadastro.setBounds(145, 100, 105, 25);
 
-        add(nome); add(cpf); add(login); add(cadastro);
+        add(labelNome); add(nome); 
+        add(labelCpf); add(cpf); 
+        add(login); add(cadastro);
 
         LoginController controller = new LoginController();
 
@@ -43,7 +49,7 @@ public class TelaLogin extends JFrame {
         });
 
         cadastro.addActionListener(e -> {
-            new TelaCadastroUsuario();
+            new TelaCadastro(); 
             dispose();
         });
 

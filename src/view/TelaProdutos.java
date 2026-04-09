@@ -8,22 +8,34 @@ public class TelaProdutos extends JFrame {
     public TelaProdutos(){
 
         setTitle("Produtos (Admin)");
-        setSize(300,200);
+        setSize(350, 250);
         setLayout(null);
 
+        JLabel labelNome = new JLabel("Produto:");
+        labelNome.setBounds(20, 30, 80, 25);
         JTextField nome = new JTextField();
-        nome.setBounds(50,30,200,25);
+        nome.setBounds(100, 30, 200, 25);
 
+        JLabel labelPreco = new JLabel("Valor (R$):");
+        labelPreco.setBounds(20, 60, 80, 25);
         JTextField preco = new JTextField();
-        preco.setBounds(50,60,200,25);
+        preco.setBounds(100, 60, 200, 25);
 
+        JLabel labelQtd = new JLabel("Estoque:");
+        labelQtd.setBounds(20, 90, 80, 25);
         JTextField qtd = new JTextField();
-        qtd.setBounds(50,90,200,25);
+        qtd.setBounds(100, 90, 200, 25);
 
         JButton salvar = new JButton("Cadastrar");
-        salvar.setBounds(50,120,100,25);
+        salvar.setBounds(100, 130, 100, 25);
 
-        add(nome); add(preco); add(qtd); add(salvar);
+        JButton voltar = new JButton("Sair");
+        voltar.setBounds(210, 130, 90, 25);
+
+        add(labelNome); add(nome); 
+        add(labelPreco); add(preco); 
+        add(labelQtd); add(qtd); 
+        add(salvar); add(voltar);
 
         ProdutoController controller = new ProdutoController();
 
@@ -32,7 +44,15 @@ public class TelaProdutos extends JFrame {
                 Double.parseDouble(preco.getText()),
                 Integer.parseInt(qtd.getText()));
 
-            JOptionPane.showMessageDialog(null,"Produto cadastrado!");
+            JOptionPane.showMessageDialog(null,"Produto cadastrado com sucesso!");
+            nome.setText("");
+            preco.setText("");
+            qtd.setText("");
+        });
+
+        voltar.addActionListener(e -> {
+            new TelaLogin(); 
+            dispose();
         });
 
         setVisible(true);

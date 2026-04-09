@@ -1,6 +1,6 @@
 package controller;
 
-import dao.UsuarioDAO;
+import model.UsuarioDAO;
 import model.Usuario;
 
 public class LoginController {

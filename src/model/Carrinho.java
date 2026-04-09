@@ -3,10 +3,11 @@ package model;
 import java.util.ArrayList;
 
 public class Carrinho {
+    
     private ArrayList<ItemCarrinho> itens = new ArrayList<>();
 
-    public void adicionar(Produto p){
-        itens.add(new ItemCarrinho(p,1));
+    public void adicionar(Produto p, int quantidade){
+        itens.add(new ItemCarrinho(p, quantidade));
     }
 
     public double getTotal(){
